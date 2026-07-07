@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sua Máquina de Outbound | Hero</title>
+  <title>HoundDial — Outbound Cold Calling & Appointment Setting</title>
+  <meta name="description" content="We chase the meetings. You close them.">
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="brand-assets/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="brand-assets/favicon/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="brand-assets/favicon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="brand-assets/favicon/favicon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="brand-assets/favicon/apple-touch-icon-180.png">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,11 +26,18 @@
         extend: {
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
+            display: ['"Baloo 2"', 'sans-serif'],
           },
           colors: {
             brand: {
-              orange: '#fb923c',
-              light: '#fed7aa'
+              charcoal: '#1A1A1A',
+              amber: '#F59E0B',
+              orange: '#F97316',
+              offwhite: '#FAFAF9',
+              surface: '#FFFFFF',
+              slate: '#6B7280',
+              lighttext: '#F5F5F4',
+              gray: '#E5E7EB'
             }
           }
         }
@@ -32,6 +47,7 @@
 
   <!-- GSAP & VanillaTilt -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
   
   <!-- Lucide Icons -->
@@ -39,7 +55,7 @@
 
   <style>
     body {
-      background-color: #f4f4f5; /* zinc-100 */
+      background-color: #FAFAF9; /* off-white from new palette */
       overflow-x: hidden;
     }
     
@@ -48,6 +64,20 @@
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(8px);
       box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    
+    .pulse-glow {
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+    }
+    
+    @keyframes pulseGlow {
+      0% { opacity: 0.3; transform: scale(0.9); }
+      100% { opacity: 0.7; transform: scale(1.1); }
+    }
+    
+    @keyframes dashSlide {
+      0% { left: -20%; }
+      100% { left: 120%; }
     }
 
     .btn-primary {
@@ -95,29 +125,27 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 lg:p-8 text-zinc-900 antialiased selection:bg-brand-orange selection:text-white">
+<body class="text-brand-charcoal antialiased selection:bg-brand-amber selection:text-white">
 
-  <!-- Main Container imitating the design system's main frame -->
-  <main class="w-full max-w-[1300px] bg-white/40 backdrop-blur-xl border border-white/50 rounded-[2.5rem] shadow-xl overflow-hidden relative min-h-[800px] flex flex-col p-6 md:p-10 lg:p-12">
+  <!-- Section 1: Hero Container -->
+  <section class="min-h-screen flex items-center justify-center p-4 lg:p-8 bg-brand-offwhite relative z-20">
+    <!-- Main Container imitating the design system's main frame -->
+    <main class="w-full max-w-[1300px] bg-white/40 backdrop-blur-xl border border-white/50 rounded-[2.5rem] shadow-xl overflow-hidden relative min-h-[800px] flex flex-col p-6 md:p-10 lg:p-12">
     
     <!-- Header -->
     <header class="flex items-center justify-between mb-12 relative z-20 anim-el">
       <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-full bg-zinc-900 text-white flex items-center justify-center shadow-lg">
-          <i data-lucide="target" class="w-4 h-4"></i>
-        </div>
-        <span class="text-lg font-medium tracking-tight">OUT<span class="text-zinc-500">BOUND</span></span>
+        <img src="brand-assets/HoundDial-Lockup-Horizontal.svg" alt="HoundDial" class="h-8 md:h-10 w-auto">
       </div>
       
       <nav class="hidden md:flex glass-pill rounded-full px-6 py-2 gap-8 text-xs font-medium uppercase tracking-widest text-zinc-500">
-        <a href="#" class="hover:text-zinc-900 transition-colors">Solução</a>
-        <a href="#" class="hover:text-zinc-900 transition-colors">Resultados</a>
-        <a href="#" class="hover:text-zinc-900 transition-colors">Preços</a>
-        <a href="#" class="hover:text-zinc-900 transition-colors">Contato</a>
+        <a href="#how-it-works" class="hover:text-zinc-900 transition-colors">How it works</a>
+        <a href="#" class="hover:text-zinc-900 transition-colors">Why HoundDial</a>
+        <a href="#" class="hover:text-zinc-900 transition-colors">FAQ</a>
       </nav>
       
-      <a href="#" class="glass-pill rounded-lg px-5 py-2.5 flex items-center gap-2 group hover:bg-white/80 transition-all text-xs font-medium uppercase tracking-tight text-zinc-600">
-        <span>Falar com especialista</span>
+      <a href="#book" class="glass-pill rounded-lg px-5 py-2.5 flex items-center gap-2 group hover:bg-white/80 transition-all text-xs font-medium uppercase tracking-tight text-zinc-600">
+        <span>Book a Call</span>
         <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
       </a>
     </header>
@@ -130,50 +158,49 @@
         <!-- Social Proof Badge -->
         <div class="glass-pill inline-flex rounded-full items-center pl-1.5 pr-5 py-1.5 mb-8 w-max anim-el">
           <div class="flex -space-x-2 mr-3">
-            <img src="https://i.pravatar.cc/100?img=33" class="w-6 h-6 rounded-full border-2 border-white" alt="Avatar 1">
-            <img src="https://i.pravatar.cc/100?img=47" class="w-6 h-6 rounded-full border-2 border-white" alt="Avatar 2">
-            <img src="https://i.pravatar.cc/100?img=12" class="w-6 h-6 rounded-full border-2 border-white" alt="Avatar 3">
+            <img src="brand-assets/linkedin/Profile-Amber-800.png" class="w-6 h-6 rounded-full border-2 border-white object-cover" alt="Profile Amber">
+            <img src="brand-assets/linkedin/Profile-Charcoal-800.png" class="w-6 h-6 rounded-full border-2 border-white object-cover" alt="Profile Charcoal">
             <div class="w-6 h-6 rounded-full border-2 border-white bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">+500</div>
           </div>
-          <span class="text-xs font-medium text-zinc-600 tracking-wide"><span class="text-zinc-900 font-semibold">reuniões agendadas</span> este mês</span>
+          <span class="text-xs font-medium text-zinc-600 tracking-wide"><span class="text-zinc-900 font-semibold">meetings booked</span> this month</span>
         </div>
 
         <!-- Headline -->
         <h1 class="headline font-medium tracking-tighter mb-6 anim-headline text-zinc-900">
-          <div class="overflow-hidden"><span class="block">Sua máquina</span></div>
-          <div class="overflow-hidden"><span class="block text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600 font-light">de Outbound.</span></div>
+          <div class="overflow-hidden"><span class="block">Your closers</span></div>
+          <div class="overflow-hidden"><span class="block text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600 font-light">should only close.</span></div>
         </h1>
 
         <!-- Subtitle -->
         <p class="text-sm md:text-base text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6 anim-el">
-          Enchemos seu funil com leads hiper-qualificados enquanto você foca no que importa: fechar vendas. Prospecção B2B de alta precisão.
+          HoundDial runs your outbound cold calling and books qualified meetings straight onto your team's calendar — so your closers spend their time closing, not dialing.
         </p>
 
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row gap-4 mb-16 anim-el">
-          <button class="btn-primary flex items-center justify-between gap-3 text-zinc-900 rounded-full px-6 py-3 font-medium text-sm group">
-            <span>Começar agora</span>
+          <a href="#book" class="btn-primary flex items-center justify-between gap-3 text-zinc-900 rounded-full px-6 py-3 font-medium text-sm group w-max">
+            <span>Book a Call</span>
             <span class="bg-black/10 rounded-full p-1 group-hover:bg-black/20 transition-colors">
               <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
             </span>
-          </button>
+          </a>
           
-          <button class="btn-secondary flex items-center gap-2 text-zinc-600 rounded-full px-6 py-3 font-medium text-sm group">
-            <span>Ver demonstração</span>
-            <i data-lucide="play" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-600 transition-colors fill-current"></i>
-          </button>
+          <a href="#how-it-works" class="btn-secondary flex items-center gap-2 text-zinc-600 rounded-full px-6 py-3 font-medium text-sm group w-max">
+            <span>See how it works</span>
+            <i data-lucide="arrow-down" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
+          </a>
         </div>
 
         <!-- Mini Stats -->
         <div class="flex gap-8 items-center mt-auto anim-el">
           <div class="text-center group cursor-default">
-            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">Taxa de Abertura</p>
-            <p class="text-sm text-zinc-900 font-medium">68% média</p>
+            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">Connect Rate</p>
+            <p class="text-sm text-zinc-900 font-medium">12% avg</p>
           </div>
           <div class="w-[1px] h-8 bg-zinc-200"></div>
           <div class="text-center group cursor-default">
             <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">Time to value</p>
-            <p class="text-sm text-zinc-900 font-medium">< 14 dias</p>
+            <p class="text-sm text-zinc-900 font-medium">< 14 days</p>
           </div>
         </div>
       </div>
@@ -189,7 +216,7 @@
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span class="text-[10px] uppercase font-semibold text-white tracking-wide">Campanhas Ativas</span>
+              <span class="text-[10px] uppercase font-semibold text-white tracking-wide">Active Campaigns</span>
             </div>
             <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
               <i data-lucide="activity" class="w-4 h-4"></i>
@@ -199,11 +226,11 @@
           <!-- Main Metrics -->
           <div class="grid grid-cols-2 gap-4 mb-8">
             <div class="bg-white/5 rounded-xl p-4 border border-white/5">
-              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Leads Contatados</p>
+              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Leads Contacted</p>
               <p class="text-2xl text-white font-medium tracking-tight stat-count" data-val="1248">0</p>
             </div>
             <div class="bg-white/5 rounded-xl p-4 border border-white/5">
-              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Tx. Conexão</p>
+              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Connect Rate</p>
               <div class="flex items-end gap-1">
                 <p class="text-2xl text-emerald-400 font-medium tracking-tight"><span class="stat-count" data-val="12">0</span>%</p>
               </div>
@@ -229,8 +256,8 @@
                 <i data-lucide="calendar-check" class="w-4 h-4 text-emerald-400"></i>
               </div>
               <div>
-                <p class="text-white text-xs font-medium">Novas Reuniões</p>
-                <p class="text-white/50 text-[10px]">Hoje</p>
+                <p class="text-white text-xs font-medium">New Meetings</p>
+                <p class="text-white/50 text-[10px]">Today</p>
               </div>
             </div>
             <div class="text-right">
@@ -244,7 +271,222 @@
       </div>
       
     </div>
-  </main>
+    </main>
+  </section>
+
+  <!-- Section 2: Brand Identity Orbit (Charcoal Section) -->
+  <section class="bg-brand-charcoal text-brand-lighttext py-24 lg:py-32 relative overflow-hidden" id="brand-identity">
+    
+    <!-- Abstract Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+      <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-brand-amber/5 rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-[10%] right-[5%] w-[40%] h-[40%] bg-brand-orange/5 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <!-- Header -->
+      <div class="text-center mb-32 anim-brand-header">
+        <h2 class="font-display font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-white tracking-tight">2. Brand identity</h2>
+        <p class="text-brand-slate text-lg md:text-xl max-w-2xl mx-auto font-medium font-sans">
+          Visual presence mapped out. From our vibrant mark to strict lockups.
+        </p>
+      </div>
+
+      <!-- Orbit Layout -->
+      <div class="relative w-full max-w-5xl mx-auto h-[600px] flex items-center justify-center anim-orbit">
+        
+        <!-- Central Glowing Sphere (Hound mark abstraction) -->
+        <div class="absolute w-40 h-40 rounded-full bg-brand-amber blur-3xl opacity-40 pulse-glow pointer-events-none"></div>
+        <div class="absolute w-32 h-32 rounded-full bg-gradient-to-br from-brand-amber to-brand-orange blur-xl opacity-60 pointer-events-none"></div>
+        <div class="absolute w-24 h-24 z-10 flex items-center justify-center group cursor-pointer transition-transform duration-300 hover:scale-110">
+           <img src="brand-assets/HoundDial-Icon-Reversed.svg" alt="HoundDial Icon" class="w-full h-full drop-shadow-[0_0_20px_rgba(245,158,11,0.6)]">
+        </div>
+        
+        <!-- Rings -->
+        <div class="absolute w-[350px] h-[350px] rounded-full border border-white/5 border-b-brand-amber/30 animate-[spin_30s_linear_infinite]"></div>
+        <div class="absolute w-[550px] h-[550px] rounded-full border border-white/5 border-l-brand-orange/20 border-r-white/10 animate-[spin_45s_linear_infinite_reverse]"></div>
+        <div class="absolute w-[800px] h-[800px] rounded-full border border-white/5 border-t-white/10 animate-[spin_60s_linear_infinite]"></div>
+
+        <!-- Text Nodes -->
+        <!-- Left Node 1: Wordmark -->
+        <div class="absolute left-0 lg:-left-12 top-[15%] w-72 text-right pr-6 lg:pr-8 anim-node hidden md:block">
+          <div class="absolute right-0 top-1/2 w-40 h-[1px] bg-gradient-to-r from-transparent to-white/20 -translate-y-1/2 translate-x-full"></div>
+          <h3 class="font-display font-semibold text-2xl text-white mb-2">Wordmark "HoundDial"</h3>
+          <p class="text-sm text-brand-slate font-sans leading-relaxed">Baloo 2 (bold, rounded). The "o" in Hound is a stylized hound mark.</p>
+        </div>
+
+        <!-- Right Node 1: Lockups -->
+        <div class="absolute right-0 lg:-right-12 top-[25%] w-72 text-left pl-6 lg:pl-8 anim-node hidden md:block">
+          <div class="absolute left-0 top-1/2 w-48 h-[1px] bg-gradient-to-l from-transparent to-brand-amber/30 -translate-y-1/2 -translate-x-full"></div>
+          <h3 class="font-display font-semibold text-2xl text-white mb-2">Color Lockups</h3>
+          <p class="text-sm text-brand-slate font-sans leading-relaxed">Use the reversed/white lockup on dark header/footer, standard on light sections.</p>
+        </div>
+
+        <!-- Left Node 2: Stylized Mark -->
+        <div class="absolute left-0 lg:-left-12 bottom-[25%] w-72 text-right pr-6 lg:pr-8 anim-node hidden md:block">
+          <div class="absolute right-0 top-1/2 w-56 h-[1px] bg-gradient-to-r from-transparent to-brand-amber/40 -translate-y-1/2 translate-x-full"></div>
+          <h3 class="font-display font-semibold text-2xl text-brand-amber mb-2">Stylized Mark</h3>
+          <p class="text-sm text-brand-slate font-sans leading-relaxed">Amber ring (head) with a charcoal nose and a single ear draped to the left.</p>
+        </div>
+
+        <!-- Right Node 2: Formats & Rules -->
+        <div class="absolute right-0 lg:-right-12 bottom-[15%] w-72 text-left pl-6 lg:pl-8 anim-node hidden md:block">
+          <div class="absolute left-0 top-1/2 w-40 h-[1px] bg-gradient-to-l from-transparent to-white/20 -translate-y-1/2 -translate-x-full"></div>
+          <h3 class="font-display font-semibold text-2xl text-white mb-2">Favicon & Rules</h3>
+          <p class="text-sm text-brand-slate font-sans leading-relaxed">Logo & Favicon files provided as SVG. Give the logo clear space; never stretch or recolor it.</p>
+        </div>
+        
+        <!-- Mobile Layout for Nodes (visible only on small screens) -->
+        <div class="md:hidden absolute inset-0 flex flex-col justify-between items-center py-12 pointer-events-none">
+          <div class="bg-brand-charcoal/80 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center w-64 anim-node pointer-events-auto">
+             <h3 class="font-display font-semibold text-xl text-brand-amber mb-1">Stylized Mark</h3>
+             <p class="text-xs text-brand-slate">Amber ring with charcoal nose and ear.</p>
+          </div>
+          <div class="bg-brand-charcoal/80 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center w-64 anim-node pointer-events-auto">
+             <h3 class="font-display font-semibold text-xl text-white mb-1">Lockups & SVG</h3>
+             <p class="text-xs text-brand-slate">Reversed on dark, standard on light.</p>
+          </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="absolute right-[25%] top-[20%] text-brand-amber/80 animate-pulse hidden md:block">
+          <i data-lucide="sun" class="w-6 h-6"></i>
+        </div>
+        <div class="absolute left-[20%] bottom-[20%] text-white/40 hidden md:block" style="animation: pulseGlow 5s ease-in-out infinite alternate;">
+          <i data-lucide="circle-dashed" class="w-8 h-8"></i>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The Problem -->
+  <section class="bg-brand-offwhite py-24 lg:py-32 relative" id="problem">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      
+      <div class="text-center mb-20 anim-problem-header">
+        <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 text-brand-charcoal tracking-tight">Cold calling eats your team alive.</h2>
+        <p class="text-brand-slate text-lg max-w-2xl mx-auto font-medium font-sans">
+          Your closers should be closing, not dealing with voicemails and gatekeepers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Pain Point 1 -->
+        <div class="bg-brand-surface p-8 rounded-2xl border border-brand-gray shadow-sm hover:shadow-md transition-shadow anim-problem-card">
+          <div class="w-12 h-12 rounded-xl bg-red-50 text-red-500 flex items-center justify-center mb-6">
+            <i data-lucide="flame" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-brand-charcoal mb-3">Reps burn out dialing</h3>
+          <p class="text-brand-slate leading-relaxed">
+            Your best closers waste hours on gatekeepers and voicemails instead of talking to decision-makers.
+          </p>
+        </div>
+        
+        <!-- Pain Point 2 -->
+        <div class="bg-brand-surface p-8 rounded-2xl border border-brand-gray shadow-sm hover:shadow-md transition-shadow anim-problem-card">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center mb-6">
+            <i data-lucide="snowflake" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-brand-charcoal mb-3">Pipeline goes cold</h3>
+          <p class="text-brand-slate leading-relaxed">
+            Prospecting slips the moment your team gets busy closing. Consistency is the first casualty of success.
+          </p>
+        </div>
+
+        <!-- Pain Point 3 -->
+        <div class="bg-brand-surface p-8 rounded-2xl border border-brand-gray shadow-sm hover:shadow-md transition-shadow anim-problem-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-charcoal/5 text-brand-charcoal flex items-center justify-center mb-6">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-bold text-xl text-brand-charcoal mb-3">Hiring is slow & costly</h3>
+          <p class="text-brand-slate leading-relaxed">
+            Hiring SDRs means dealing with ramp time, management overhead, and turnover. It adds up fast.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: How it works -->
+  <section class="bg-brand-surface py-24 lg:py-32 border-t border-brand-gray relative overflow-hidden" id="how-it-works">
+    
+    <!-- Decorative background elements -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-brand-amber/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-charcoal/5 rounded-full blur-[100px] pointer-events-none translate-y-1/2 -translate-x-1/2"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      
+      <div class="text-center mb-24 anim-hiw-header">
+        <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 text-brand-charcoal tracking-tight">How HoundDial works</h2>
+        <p class="text-brand-slate text-lg max-w-2xl mx-auto font-medium font-sans">
+          A seamless extension of your sales team. We handle the grind, you handle the deals.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative">
+        <!-- Connecting Line -->
+        <div class="hidden lg:block absolute top-8 left-[10%] right-[10%] h-[2px] bg-brand-gray z-0 overflow-hidden rounded-full">
+           <!-- Animated progress dash -->
+           <div class="absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-transparent via-brand-amber to-transparent opacity-80" style="animation: dashSlide 3s linear infinite;"></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="relative z-10 flex flex-col items-center text-center anim-hiw-step">
+          <div class="w-16 h-16 rounded-full bg-brand-surface border-2 border-brand-amber flex items-center justify-center text-2xl font-display font-bold text-brand-amber mb-6 shadow-[0_0_15px_rgba(245,158,11,0.15)] bg-clip-padding backdrop-filter backdrop-blur-sm">
+            1
+          </div>
+          <h3 class="font-display font-bold text-xl text-brand-charcoal mb-3">We learn your offer</h3>
+          <p class="text-brand-slate text-sm leading-relaxed">
+            ICP, script, objections, target list. We absorb your value proposition completely.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative z-10 flex flex-col items-center text-center anim-hiw-step lg:mt-12">
+          <div class="w-16 h-16 rounded-full bg-brand-surface border-2 border-brand-amber flex items-center justify-center text-2xl font-display font-bold text-brand-amber mb-6 shadow-[0_0_15px_rgba(245,158,11,0.15)] bg-clip-padding backdrop-filter backdrop-blur-sm">
+            2
+          </div>
+          <h3 class="font-display font-bold text-xl text-brand-charcoal mb-3">We dial</h3>
+          <p class="text-brand-slate text-sm leading-relaxed">
+            Trained callers work your list every day with a proven, high-converting approach.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative z-10 flex flex-col items-center text-center anim-hiw-step">
+          <div class="w-16 h-16 rounded-full bg-brand-surface border-2 border-brand-amber flex items-center justify-center text-2xl font-display font-bold text-brand-amber mb-6 shadow-[0_0_15px_rgba(245,158,11,0.15)] bg-clip-padding backdrop-filter backdrop-blur-sm">
+            3
+          </div>
+          <h3 class="font-display font-bold text-xl text-brand-charcoal mb-3">We book meetings</h3>
+          <p class="text-brand-slate text-sm leading-relaxed">
+            Qualified appointments placed directly onto your calendar, pre-qualified to your criteria.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="relative z-10 flex flex-col items-center text-center anim-hiw-step lg:mt-12">
+          <div class="w-16 h-16 rounded-full bg-brand-amber border-2 border-brand-amber flex items-center justify-center text-2xl font-display font-bold text-brand-charcoal mb-6 shadow-[0_0_25px_rgba(245,158,11,0.4)]">
+            4
+          </div>
+          <h3 class="font-display font-bold text-xl text-brand-charcoal mb-3">You close</h3>
+          <p class="text-brand-slate text-sm leading-relaxed">
+            Show up to warm, booked conversations. Your closers only focus on closing.
+          </p>
+        </div>
+      </div>
+      
+      <!-- CTA inside How It Works -->
+      <div class="mt-20 text-center anim-hiw-cta">
+        <a href="#book" class="inline-flex items-center justify-center gap-2 bg-brand-amber hover:bg-brand-orange text-brand-charcoal font-semibold px-8 py-4 rounded-full transition-all hover:scale-105 shadow-[0_10px_20px_-10px_rgba(245,158,11,0.6)]">
+          <span>Book a Call</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- GSAP Animation Script -->
   <script>
@@ -306,6 +548,49 @@
         const tiltElements = document.querySelectorAll("[data-tilt]");
         tiltElements.forEach(el => el.removeAttribute("data-tilt"));
       }
+      
+      // Register ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Brand Identity Section Animations
+      gsap.set(".anim-brand-header, .anim-orbit, .anim-node", { autoAlpha: 0, y: 30 });
+      
+      const brandTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#brand-identity",
+          start: "top 75%",
+          end: "bottom bottom",
+          toggleActions: "play none none reverse"
+        }
+      });
+      
+      brandTl.to(".anim-brand-header", { autoAlpha: 1, y: 0, duration: 0.8 })
+             .to(".anim-orbit", { autoAlpha: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.4")
+             .to(".anim-node", { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "back.out(1.2)" }, "-=0.5");
+             
+      // Problem Section
+      gsap.set(".anim-problem-header, .anim-problem-card", { autoAlpha: 0, y: 30 });
+      ScrollTrigger.create({
+        trigger: "#problem",
+        start: "top 75%",
+        onEnter: () => {
+          gsap.to(".anim-problem-header", { autoAlpha: 1, y: 0, duration: 0.8 });
+          gsap.to(".anim-problem-card", { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out", delay: 0.2 });
+        }
+      });
+
+      // How it Works Section
+      gsap.set(".anim-hiw-header, .anim-hiw-step, .anim-hiw-cta", { autoAlpha: 0, y: 30 });
+      ScrollTrigger.create({
+        trigger: "#how-it-works",
+        start: "top 75%",
+        onEnter: () => {
+          gsap.to(".anim-hiw-header", { autoAlpha: 1, y: 0, duration: 0.8 });
+          gsap.to(".anim-hiw-step", { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "back.out(1.2)", delay: 0.2 });
+          gsap.to(".anim-hiw-cta", { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.8 });
+        }
+      });
+             
     });
   </script>
 </body>
