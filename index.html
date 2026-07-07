@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sua Máquina de Outbound | Hero</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              orange: '#fb923c',
+              light: '#fed7aa'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- GSAP & VanillaTilt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #f4f4f5; /* zinc-100 */
+      overflow-x: hidden;
+    }
+    
+    /* Utility for custom glass gradients similar to the design system */
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at 10% 0%, #fed7aa 0%, #fb923c 100%);
+      box-shadow: 0 15px 25px -10px rgba(248, 113, 22, 0.7), inset 0 4px 8px rgba(253, 230, 138, 0.9), inset 0 -4px 8px rgba(249, 115, 22, 0.9);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 30px -10px rgba(248, 113, 22, 0.8), inset 0 4px 8px rgba(253, 230, 138, 0.9), inset 0 -4px 8px rgba(249, 115, 22, 0.9);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.1) 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.12) 100%);
+    }
+
+    .hero-card {
+      background: #18181b; /* zinc-900 */
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    /* Animation classes */
+    .anim-el {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .chart-bar {
+      transform-origin: bottom;
+      transform: scaleY(0);
+    }
+    
+    /* Responsive text clamping */
+    .headline {
+      font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
+      line-height: 0.95;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 lg:p-8 text-zinc-900 antialiased selection:bg-brand-orange selection:text-white">
+
+  <!-- Main Container imitating the design system's main frame -->
+  <main class="w-full max-w-[1300px] bg-white/40 backdrop-blur-xl border border-white/50 rounded-[2.5rem] shadow-xl overflow-hidden relative min-h-[800px] flex flex-col p-6 md:p-10 lg:p-12">
+    
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-12 relative z-20 anim-el">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-zinc-900 text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="target" class="w-4 h-4"></i>
+        </div>
+        <span class="text-lg font-medium tracking-tight">OUT<span class="text-zinc-500">BOUND</span></span>
+      </div>
+      
+      <nav class="hidden md:flex glass-pill rounded-full px-6 py-2 gap-8 text-xs font-medium uppercase tracking-widest text-zinc-500">
+        <a href="#" class="hover:text-zinc-900 transition-colors">Solução</a>
+        <a href="#" class="hover:text-zinc-900 transition-colors">Resultados</a>
+        <a href="#" class="hover:text-zinc-900 transition-colors">Preços</a>
+        <a href="#" class="hover:text-zinc-900 transition-colors">Contato</a>
+      </nav>
+      
+      <a href="#" class="glass-pill rounded-lg px-5 py-2.5 flex items-center gap-2 group hover:bg-white/80 transition-all text-xs font-medium uppercase tracking-tight text-zinc-600">
+        <span>Falar com especialista</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+      </a>
+    </header>
+
+    <!-- Hero Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 flex-grow items-center relative z-10">
+      
+      <!-- Left Column -->
+      <div class="lg:col-span-7 flex flex-col justify-center">
+        <!-- Social Proof Badge -->
+        <div class="glass-pill inline-flex rounded-full items-center pl-1.5 pr-5 py-1.5 mb-8 w-max anim-el">
+          <div class="flex -space-x-2 mr-3">
+            <img src="https://i.pravatar.cc/100?img=33" class="w-6 h-6 rounded-full border-2 border-white" alt="Avatar 1">
+            <img src="https://i.pravatar.cc/100?img=47" class="w-6 h-6 rounded-full border-2 border-white" alt="Avatar 2">
+            <img src="https://i.pravatar.cc/100?img=12" class="w-6 h-6 rounded-full border-2 border-white" alt="Avatar 3">
+            <div class="w-6 h-6 rounded-full border-2 border-white bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">+500</div>
+          </div>
+          <span class="text-xs font-medium text-zinc-600 tracking-wide"><span class="text-zinc-900 font-semibold">reuniões agendadas</span> este mês</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="headline font-medium tracking-tighter mb-6 anim-headline text-zinc-900">
+          <div class="overflow-hidden"><span class="block">Sua máquina</span></div>
+          <div class="overflow-hidden"><span class="block text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600 font-light">de Outbound.</span></div>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-sm md:text-base text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6 anim-el">
+          Enchemos seu funil com leads hiper-qualificados enquanto você foca no que importa: fechar vendas. Prospecção B2B de alta precisão.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-16 anim-el">
+          <button class="btn-primary flex items-center justify-between gap-3 text-zinc-900 rounded-full px-6 py-3 font-medium text-sm group">
+            <span>Começar agora</span>
+            <span class="bg-black/10 rounded-full p-1 group-hover:bg-black/20 transition-colors">
+              <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+            </span>
+          </button>
+          
+          <button class="btn-secondary flex items-center gap-2 text-zinc-600 rounded-full px-6 py-3 font-medium text-sm group">
+            <span>Ver demonstração</span>
+            <i data-lucide="play" class="w-4 h-4 text-zinc-400 group-hover:text-zinc-600 transition-colors fill-current"></i>
+          </button>
+        </div>
+
+        <!-- Mini Stats -->
+        <div class="flex gap-8 items-center mt-auto anim-el">
+          <div class="text-center group cursor-default">
+            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">Taxa de Abertura</p>
+            <p class="text-sm text-zinc-900 font-medium">68% média</p>
+          </div>
+          <div class="w-[1px] h-8 bg-zinc-200"></div>
+          <div class="text-center group cursor-default">
+            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">Time to value</p>
+            <p class="text-sm text-zinc-900 font-medium">< 14 dias</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Dashboard Card -->
+      <div class="lg:col-span-5 h-full relative perspective-1000">
+        <div class="hero-card absolute inset-0 rounded-[2rem] overflow-hidden flex flex-col p-6 md:p-8 anim-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.1">
+          
+          <!-- Card Header (Live status) -->
+          <div class="flex justify-between items-start mb-10">
+            <div class="flex gap-2 items-center bg-white/10 rounded-full px-3 py-1.5 border border-white/10 backdrop-blur-md">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="text-[10px] uppercase font-semibold text-white tracking-wide">Campanhas Ativas</span>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
+              <i data-lucide="activity" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Main Metrics -->
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="bg-white/5 rounded-xl p-4 border border-white/5">
+              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Leads Contatados</p>
+              <p class="text-2xl text-white font-medium tracking-tight stat-count" data-val="1248">0</p>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4 border border-white/5">
+              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Tx. Conexão</p>
+              <div class="flex items-end gap-1">
+                <p class="text-2xl text-emerald-400 font-medium tracking-tight"><span class="stat-count" data-val="12">0</span>%</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Animated Chart Area -->
+          <div class="flex-grow flex flex-col justify-end relative h-32 mb-6">
+            <div class="flex items-end justify-between h-full gap-2 w-full px-2">
+              <div class="w-1/6 bg-white/10 rounded-t-sm chart-bar" style="height: 30%"></div>
+              <div class="w-1/6 bg-white/10 rounded-t-sm chart-bar" style="height: 45%"></div>
+              <div class="w-1/6 bg-white/10 rounded-t-sm chart-bar" style="height: 35%"></div>
+              <div class="w-1/6 bg-white/20 rounded-t-sm chart-bar" style="height: 60%"></div>
+              <div class="w-1/6 bg-white/30 rounded-t-sm chart-bar" style="height: 80%"></div>
+              <div class="w-1/6 bg-emerald-500 rounded-t-sm chart-bar shadow-[0_0_15px_rgba(16,185,129,0.5)]" style="height: 95%"></div>
+            </div>
+          </div>
+
+          <!-- Floating Result Card -->
+          <div class="bg-white/10 border border-white/10 rounded-xl p-4 backdrop-blur-md transform translate-y-4 hover:translate-y-2 transition-transform duration-500 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                <i data-lucide="calendar-check" class="w-4 h-4 text-emerald-400"></i>
+              </div>
+              <div>
+                <p class="text-white text-xs font-medium">Novas Reuniões</p>
+                <p class="text-white/50 text-[10px]">Hoje</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-emerald-400 font-bold text-lg">
+                +<span class="stat-count" data-val="14">0</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- GSAP Animation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // GSAP Timeline setup
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      // Reset visibility for elements to be animated
+      gsap.set(".anim-el, .anim-card", { autoAlpha: 1 });
+      
+      // Headline Stagger
+      tl.fromTo(".anim-headline span", 
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1, stagger: 0.2 }
+      )
+      
+      // Text & Buttons cascade
+      .fromTo(".anim-el",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 },
+        "-=0.6"
+      )
+      
+      // Hero Card entrance
+      .fromTo(".anim-card",
+        { y: 40, opacity: 0, rotationX: prefersReducedMotion ? 0 : 5 },
+        { y: 0, opacity: 1, rotationX: 0, duration: 1, ease: "power4.out" },
+        "-=0.8"
+      )
+      
+      // Chart bars growing
+      .to(".chart-bar",
+        { scaleY: 1, duration: 0.8, stagger: 0.1, ease: "back.out(1.2)" },
+        "-=0.4"
+      );
+
+      // Count Up Animation
+      const counters = document.querySelectorAll(".stat-count");
+      counters.forEach(counter => {
+        const targetVal = parseInt(counter.getAttribute("data-val"));
+        
+        tl.to(counter, {
+          innerHTML: targetVal,
+          duration: 2,
+          ease: "power2.out",
+          snap: { innerHTML: 1 },
+          onUpdate: function() {
+            counter.innerHTML = Math.round(this.targets()[0].innerHTML);
+          }
+        }, "-=1.5");
+      });
+      
+      // Disable VanillaTilt if user prefers reduced motion
+      if (prefersReducedMotion) {
+        const tiltElements = document.querySelectorAll("[data-tilt]");
+        tiltElements.forEach(el => el.removeAttribute("data-tilt"));
+      }
+    });
+  </script>
+</body>
+</html>
