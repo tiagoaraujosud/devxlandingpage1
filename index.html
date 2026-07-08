@@ -205,68 +205,52 @@
         </div>
       </div>
 
-      <!-- Right Column: Visual Dashboard Card -->
-      <div class="lg:col-span-5 h-full relative perspective-1000">
-        <div class="hero-card absolute inset-0 rounded-[2rem] overflow-hidden flex flex-col p-6 md:p-8 anim-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.1">
+      <!-- Right Column: Video with Gradient Overlay -->
+      <div class="lg:col-span-5 h-[400px] lg:h-full relative perspective-1000 mt-10 lg:mt-0">
+        <div class="hero-card absolute inset-0 rounded-[2.5rem] overflow-hidden anim-card" data-tilt data-tilt-max="3" data-tilt-speed="600" data-tilt-glare data-tilt-max-glare="0.2">
           
-          <!-- Card Header (Live status) -->
-          <div class="flex justify-between items-start mb-10">
-            <div class="flex gap-2 items-center bg-white/10 rounded-full px-3 py-1.5 border border-white/10 backdrop-blur-md">
+          <!-- Background Video -->
+          <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover scale-105">
+            <source src="brand-assets/Woman_on_headset_typing_202607072244.mp4" type="video/mp4">
+          </video>
+
+          <!-- Gradient Overlay -->
+          <!-- A creative degradê using brand colors that adds a premium feel and keeps text readable -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-brand-charcoal/90 via-brand-amber/30 to-brand-amber/10 mix-blend-multiply"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-brand-charcoal/10 backdrop-blur-[2px]"></div>
+
+          <!-- Decorative Floating UI over the video -->
+          <div class="absolute inset-x-6 bottom-8 z-10 flex flex-col gap-4">
+            
+            <div class="self-end bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 flex items-center gap-2 transform translate-y-2 hover:-translate-y-0 transition-transform duration-300">
               <span class="relative flex h-2 w-2">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span class="text-[10px] uppercase font-semibold text-white tracking-wide">Active Campaigns</span>
+              <span class="text-xs font-medium text-white tracking-wide uppercase">Live Calling</span>
             </div>
-            <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
-              <i data-lucide="activity" class="w-4 h-4"></i>
-            </div>
-          </div>
 
-          <!-- Main Metrics -->
-          <div class="grid grid-cols-2 gap-4 mb-8">
-            <div class="bg-white/5 rounded-xl p-4 border border-white/5">
-              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Leads Contacted</p>
-              <p class="text-2xl text-white font-medium tracking-tight stat-count" data-val="1248">0</p>
-            </div>
-            <div class="bg-white/5 rounded-xl p-4 border border-white/5">
-              <p class="text-[10px] text-white/40 uppercase tracking-widest mb-2 font-medium">Connect Rate</p>
-              <div class="flex items-end gap-1">
-                <p class="text-2xl text-emerald-400 font-medium tracking-tight"><span class="stat-count" data-val="12">0</span>%</p>
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 shadow-2xl flex items-center justify-between group cursor-default">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-brand-amber/20 border border-brand-amber/30 flex items-center justify-center text-brand-amber">
+                  <i data-lucide="phone-call" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-white text-sm font-semibold tracking-wide">Connecting with prospect...</p>
+                  <p class="text-white/60 text-xs mt-0.5">Booking meeting for Q3</p>
+                </div>
+              </div>
+              <!-- Equalizer animation -->
+              <div class="flex items-end gap-1 h-6">
+                <div class="w-1 bg-brand-amber/80 rounded-full animate-[pulse_1s_ease-in-out_infinite]" style="height: 40%"></div>
+                <div class="w-1 bg-brand-amber/80 rounded-full animate-[pulse_1s_ease-in-out_infinite_0.2s]" style="height: 100%"></div>
+                <div class="w-1 bg-brand-amber/80 rounded-full animate-[pulse_1s_ease-in-out_infinite_0.4s]" style="height: 60%"></div>
+                <div class="w-1 bg-brand-amber/80 rounded-full animate-[pulse_1s_ease-in-out_infinite_0.1s]" style="height: 80%"></div>
               </div>
             </div>
+            
           </div>
-
-          <!-- Animated Chart Area -->
-          <div class="flex-grow flex flex-col justify-end relative h-32 mb-6">
-            <div class="flex items-end justify-between h-full gap-2 w-full px-2">
-              <div class="w-1/6 bg-white/10 rounded-t-sm chart-bar" style="height: 30%"></div>
-              <div class="w-1/6 bg-white/10 rounded-t-sm chart-bar" style="height: 45%"></div>
-              <div class="w-1/6 bg-white/10 rounded-t-sm chart-bar" style="height: 35%"></div>
-              <div class="w-1/6 bg-white/20 rounded-t-sm chart-bar" style="height: 60%"></div>
-              <div class="w-1/6 bg-white/30 rounded-t-sm chart-bar" style="height: 80%"></div>
-              <div class="w-1/6 bg-emerald-500 rounded-t-sm chart-bar shadow-[0_0_15px_rgba(16,185,129,0.5)]" style="height: 95%"></div>
-            </div>
-          </div>
-
-          <!-- Floating Result Card -->
-          <div class="bg-white/10 border border-white/10 rounded-xl p-4 backdrop-blur-md transform translate-y-4 hover:translate-y-2 transition-transform duration-500 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                <i data-lucide="calendar-check" class="w-4 h-4 text-emerald-400"></i>
-              </div>
-              <div>
-                <p class="text-white text-xs font-medium">New Meetings</p>
-                <p class="text-white/50 text-[10px]">Today</p>
-              </div>
-            </div>
-            <div class="text-right">
-              <p class="text-emerald-400 font-bold text-lg">
-                +<span class="stat-count" data-val="14">0</span>
-              </p>
-            </div>
-          </div>
-
         </div>
       </div>
       
